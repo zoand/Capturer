@@ -1,0 +1,150 @@
+ControlWidget {
+    font-size: 10.5pt;
+    background: transparent;
+}
+
+/*////////////////////////////////////////////////*/
+ControlWidget TitleBar {
+    background-color: rgba(25, 25, 25, 175);
+}
+
+ControlWidget TitleBar QPushButton#icon {
+    width: 0px;
+}
+
+ControlWidget TitleBar QLabel#title {
+    font-size: 10pt;
+    color: white;
+    padding-left: 0.75em;
+    min-width: 8em;
+}
+
+ControlWidget QCheckBox#pin-btn:hover,
+ControlWidget QCheckBox#min-btn:hover,
+ControlWidget QCheckBox#max-btn:hover,
+ControlWidget QCheckBox#full-btn:hover {
+    background: rgba(0, 0, 0, 100);
+}
+
+ControlWidget TitleBar QCheckBox#pin-btn::indicator:unchecked  {
+    image: url(:/icons/title-pin-light);
+}
+
+ControlWidget TitleBar QCheckBox#pin-btn::indicator:checked  {
+    image: url(:/icons/title-pin-fill-light);
+}
+
+ControlWidget TitleBar QCheckBox#min-btn::indicator {
+    image: url(:/icons/minimize-light);
+}
+
+ControlWidget TitleBar QCheckBox#max-btn::indicator:unchecked {
+    image: url(:/icons/maximize-light);
+}
+
+ControlWidget TitleBar QCheckBox#max-btn::indicator:checked {
+    image: url(:/icons/normal-light);
+}
+
+ControlWidget TitleBar QCheckBox#full-btn::indicator:unchecked {
+    image: url(:/icons/fullscreen-light);
+}
+
+ControlWidget TitleBar QCheckBox#full-btn::indicator:checked {
+    image: url(:/icons/fullscreen-back-light);
+}
+
+ControlWidget TitleBar QCheckBox#close-btn::indicator {
+    image: url(:/icons/close-light);
+}
+
+/*////////////////////////////////////////////////*/
+ControlWidget QWidget#control-bar {
+    background-color: rgba(25, 25, 25, 175);
+}
+
+QWidget#control-bar QCheckBox::indicator {
+    font-size: 9pt;
+
+    height: 1.3em;
+    width: 1.3em;
+    padding: 0.35em;
+    border-radius: 5px;
+}
+
+QWidget#control-bar QCheckBox::indicator:hover {
+    background-color: rgba(0, 0, 0, 100);
+}
+
+/* pause button */
+QWidget#control-bar QCheckBox#pause-btn::indicator:checked {
+    image: url(:/icons/play-light);
+}
+
+QWidget#control-bar QCheckBox#pause-btn::indicator:unchecked {
+    image: url(:/icons/pause-light);
+}
+
+/* time labels */
+QWidget#control-bar QLabel {
+    font-size: 9pt;
+
+    color: #efefef;
+}
+
+QWidget#control-bar QLabel#time-label {
+    color: white;
+}
+
+/* subtitles */
+QWidget#control-bar QCheckBox#subtitles-btn::indicator {
+    image: url(:/icons/subtitles-light);
+}
+
+QWidget#control-bar QCheckBox#subtitles-btn::indicator:hover {
+    image: url(:/icons/subtitles);
+}
+
+/* speed */
+QWidget#control-bar ComboBox#speed-box {
+    background-color: transparent;
+    border: none;
+
+    height: 2em;
+    width: 2em;
+    padding: 0em 1em;
+
+    font-size: 9pt;
+    font-weight: bold;
+    color: #e6e6e6;
+}
+
+QWidget#control-bar ComboBox#speed-box::drop-down,
+QWidget#control-bar ComboBox#speed-box::down-arrow {
+    width: 0px;
+    height: 0px;
+}
+
+QWidget#control-bar ComboBox#speed-box:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 100);
+}
+
+
+/* volume */
+QWidget#control-bar QCheckBox#volume-btn::indicator:checked {
+    image: url(:/icons/volume-fill-mute-light);
+}
+
+QWidget#control-bar QCheckBox#volume-btn::indicator:unchecked {
+    image: url(:/icons/volume-fill-high-light);
+}
+
+/* settings */
+QWidget#control-bar QCheckBox#setting-btn::indicator {
+    image: url(:/icons/settings-fill-light);
+}
+
+QWidget#control-bar QCheckBox#setting-btn::indicator:hover {
+    image: url(:/icons/settings-fill);
+}

@@ -1,0 +1,230 @@
+/*///////////////////////////////////////////////////////////////*/
+QScrollArea {
+    background-color: #272728;
+}
+
+QGroupBox {
+    border: 1px solid #202020;
+    background-color: #2c2c2c;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QCheckBox {
+    color: #e6e6e6;
+}
+
+QCheckBox::indicator {
+    image: url(:/icons/checkbox-unchecked-light);
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QComboBox {
+    border: 1px solid #323232;
+    background-color: #323232;
+    color: #e6e6e6;
+}
+
+QComboBox::down-arrow {
+    image: url(:/icons/arrow-down-light);
+}
+
+QComboBox::down-arrow:on {
+    image: url(:/icons/arrow-up-light);
+}
+
+QComboBox:hover {
+    background-color: #393939;
+    border: 1px solid #393939;
+}
+
+QComboBox:on {
+    border: 1px solid #409eff;
+}
+
+QComboBox QAbstractItemView {
+    border: 1px solid #e4e7ed;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #232323;
+    border: 1px solid #323232;
+}
+
+QComboBox QAbstractItemView::item {
+    color: #e6e6e6;
+}
+
+QComboBox QAbstractItemView::item:hover,
+QComboBox QAbstractItemView::item:selected,
+QComboBox QAbstractItemView::item:checked {
+    background-color: #323232;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QLineEdit {
+    background-color: #323232;
+    border: 1px solid #323232;
+    color: #e6e6e6;
+}
+
+QLineEdit:hover {
+    background-color: #393939;
+    border: 1px solid #393939;
+}
+
+QLineEdit:focus {
+    color: #409eff;
+    border: 1px solid #323232;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QSpinBox {
+    border: 1px solid #323232;
+    background-color: #323232;
+    color: #e6e6e6;
+}
+
+QSpinBox:hover {
+    background-color: #393939;
+    border: 1px solid #393939;
+}
+
+QSpinBox:focus {
+    border: 1px solid #409eff;
+}
+
+QSpinBox::down-button,
+QSpinBox::up-button {
+    background-color: #2b2b2b;
+}
+
+QSpinBox::up-button:hover,
+QSpinBox::up-button:pressed,
+QSpinBox::down-button:hover,
+QSpinBox::down-button:pressed {
+    background-color: #262626;
+}
+
+QSpinBox::up-arrow {
+    image: url(:/icons/arrow-up-light);
+}
+
+QSpinBox::down-arrow {
+    image: url(:/icons/arrow-down-light);
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QMenu {
+    background-color: #232323;
+    color: #e6e6e6;
+    border: 1px solid #323232;
+}
+
+QMenu::item::selected {
+    background-color: #323232;
+}
+
+QMenu::indicator:checked {
+    border: 1px solid #969696;
+    background: #e6e6e6;
+}
+
+QMenu::right-arrow {
+    image: url(:/icons/arrow-right-light);
+}
+
+QMenu::separator {
+    background-color: #323232;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QScrollBar::handle {
+    background: #959595;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QColorDialog {
+    background-color: #232323;
+    color: #e6e6e6;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QPushButton {
+    background-color: #323232;
+    border: 1px solid #323232;
+    color: #e6e6e6;
+}
+
+QPushButton:hover {
+    background-color: #383838;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+/* QFrame::VLine == 0x0005 */
+QFrame[frameShape="5"] {
+    color: #323232;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+QLabel {
+    color: #e6e6e6;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+ColorWindow {
+    background-color: #272728;
+}
+
+NavigationBar {
+    border: 1px solid #303031;
+    background-color: #201f23;
+}
+
+NavigationBar QCheckBox {
+    background-color: #2a292d;
+    border: 1px solid #444445;
+}
+
+/*///////////////////////////////////////////////////////////////*/
+TitleBar {
+    background-color: #272728;
+}
+
+TitleBar QCheckBox#pin-btn::indicator:unchecked  {
+    image: url(:/icons/title-pin-light);
+}
+
+TitleBar QCheckBox#pin-btn::indicator:checked  {
+    image: url(:/icons/title-pin-fill-light);
+}
+
+TitleBar QCheckBox#min-btn::indicator {
+    image: url(:/icons/minimize-light);
+}
+
+TitleBar QCheckBox#max-btn::indicator:unchecked {
+    image: url(:/icons/maximize-light);
+}
+
+TitleBar QCheckBox#max-btn::indicator:checked {
+    image: url(:/icons/normal-light);
+}
+
+TitleBar QCheckBox#full-btn::indicator:unchecked {
+    image: url(:/icons/fullscreen-light);
+}
+
+TitleBar QCheckBox#full-btn::indicator:checked {
+    image: url(:/icons/fullscreen-back-light);
+}
+
+TitleBar QCheckBox#close-btn::indicator {
+    image: url(:/icons/close-light);
+}
+
+TitleBar QCheckBox#pin-btn:hover,
+TitleBar QCheckBox#min-btn:hover,
+TitleBar QCheckBox#max-btn:hover,
+TitleBar QCheckBox#full-btn:hover {
+    background-color: #323232;
+}

@@ -1,76 +1,88 @@
 #ifndef CAPTURER_H
 #define CAPTURER_H
 
-#include <vector>
-#include <queue>
-#include <memory>
-#include <QPixmap>
-#include <QSystemTrayIcon>
-#include <QMimeData>
-#include <QMenu>
-#include "screenshoter.h"
-#include "imagewindow.h"
+#include "camera-player.h"
+#include "framelesswindow.h"
+#include "menu.h"
 #include "screenrecorder.h"
-#include "qhotkey.h"
 #include "screenshoter.h"
-#include "gifcapturer.h"
 #include "settingdialog.h"
-#include "json.hpp"
 
-template <typename T, int MAX_SIZE = 100>
-class LimitSizeVector : public std::vector<T> {
-public:
-    void push(const T& value)
-    {
-        this->push_back(value);
+#include <memory>
+#include <QApplication>
+#include <qhotkey.h>
+#include <QMimeData>
+#include <QPointer>
+#include <QScopedPointer>
 
-        if(this->size() > MAX_SIZE) {
-            this->erase(this->begin());
-        }
-    }
-};
+class QSystemTrayIcon;
 
-class Capturer : public QWidget
+class Capturer final : public QApplication
 {
     Q_OBJECT
 
 public:
-    explicit Capturer(QWidget *parent = nullptr);
-    ~Capturer() override = default;
+    Capturer(int& argc, char **argv);
 
-private slots:
-    void pinLastImage();
-    void showImages();
+    void Init();
 
-    void updateConfig();
+public slots:
+    void QuickLook();
 
-    void showMessage(const QString &title, const QString &msg,
-                     QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information,
-                     int msecs = 10000);
+    void PreviewClipboard();
+    void PreviewMimeData(const std::shared_ptr<QMimeData>& mimedata);
+    void TogglePreviews();
+    void TransparentPreviewInput();
 
-    void clipboardChanged();
+    void ToggleCamera();
+    void OpenSettingsDialog();
+
+    void UpdateHotkeys();
+
+    void TrayActivated(QSystemTrayIcon::ActivationReason reason);
+    void ShowMessage(const QString& title, const QString& msg,
+                     QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information, int msecs = 10000);
+
+    void SetTheme(const QString& theme);
+
+    void UpdateScreenshotStyle();
+
+    void RecordVideo();
+    void RecordGIF();
 
 private:
-    void setupSystemTrayIcon();
+    void SystemTrayInit();
 
-    ScreenShoter * sniper_ = nullptr;
-    ScreenRecorder * recorder_ = nullptr;
-    GifCapturer * gifcptr_ = nullptr;
+    QString theme_{};
 
-    LimitSizeVector<ImageWindow *> clipboard_history_;
+    QScopedPointer<QSystemTrayIcon> tray_{};
+    QScopedPointer<Menu>            tray_menu_{};
+    QPointer<QAction>               tray_snip_{};
+    QPointer<QAction>               tray_record_video_{};
+    QPointer<QAction>               tray_record_gif_{};
+    QPointer<QAction>               tray_open_camera_{};
+    QPointer<QAction>               tray_settings_{};
+    QPointer<QAction>               tray_exit_{};
 
-    QSystemTrayIcon *sys_tray_icon_ = nullptr;
-
-    SettingWindow * setting_dialog_ = nullptr;
+    QPointer<SettingWindow> settings_window_{};
 
     // hotkey
-    QHotkey *snip_sc_ = nullptr;
-    QHotkey *show_pin_sc_ = nullptr;
-    QHotkey *pin_sc_ = nullptr;
-    QHotkey *gif_sc_ = nullptr;
-    QHotkey *video_sc_ = nullptr;
+    QPointer<QHotkey> snip_hotkey_{};       // screenshot
+    QPointer<QHotkey> video_hotkey_{};      // video recording
+    QPointer<QHotkey> gif_hotkey_{};        // gif recording
+    QPointer<QHotkey> preview_hotkey_{};    // preview
+    QPointer<QHotkey> quicklook_hotkey_{};  // Explorer window, Windows only
+    QPointer<QHotkey> transparent_input_{}; // for preview window
+    QPointer<QHotkey> toggle_hotkey_{};     // toggle previews
 
-    bool images_visible_ = true;
+    QScopedPointer<ScreenShoter> sniper_{};
+    QPointer<ScreenRecorder>     recorder_{};
+    QPointer<ScreenRecorder>     gifcptr_{};
+    QPointer<CameraPlayer>       camera_{};
+
+    std::list<QPointer<FramelessWindow>> previews_{};
 };
+
+inline Capturer *App() { return dynamic_cast<Capturer *>(qApp); }
 
 #endif // CAPTURER_H

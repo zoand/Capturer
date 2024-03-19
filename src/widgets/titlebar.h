@@ -1,37 +1,38 @@
-#ifndef TITLE_BAR_H
-#define TITLE_BAR_H
+#ifndef CAPTURER_TITLE_BAR_H
+#define CAPTURER_TITLE_BAR_H
 
-#include <QWidget>
-#include <QLabel>
-#include "iconbutton.h"
+#include "framelesswindow.h"
 
-class TitleBar : public QWidget {
-	Q_OBJECT
+#include <QPointer>
+
+class QAbstractButton;
+class QLabel;
+
+class TitleBar : public QWidget
+{
+    Q_OBJECT
 public:
-	explicit TitleBar(QWidget *parent = nullptr);
+    explicit TitleBar(FramelessWindow *parent);
 
-    void setTitle(const QString& title) { title_label_->setText(title); }
+    void setHideOnFullScreen(bool value = true) { hide_on_fullscreen_ = value; }
 
-signals:
-	void close();
-	void maximize();
-	void minimize();
-	void normal();
-	void moved(const QPoint&);
+    [[nodiscard]] bool isInSystemButtons(const QPoint& pos) const;
 
 protected:
-	void mousePressEvent(QMouseEvent *) override;
-	void mouseMoveEvent(QMouseEvent *) override;
-	void mouseReleaseEvent(QMouseEvent *) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private:
-    QIcon icon_;
-	QLabel * icon_label_ = nullptr;
-	QLabel * title_label_ = nullptr;
-    IconButton * close_btn_ = nullptr;
+    FramelessWindow *window_{};
+    bool             hide_on_fullscreen_{ true };
 
-	QPoint begin_{ 0, 0 };
-	bool moving = false;
-	bool is_maximized_ = false;
+    QPointer<QAbstractButton> icon_btn_{};
+    QPointer<QLabel>          title_label_{};
+    QPointer<QAbstractButton> pin_btn_{};
+    QPointer<QAbstractButton> min_btn_{};
+    QPointer<QAbstractButton> max_btn_{};
+    QPointer<QAbstractButton> full_btn_{};
+    QPointer<QAbstractButton> close_btn_{};
 };
-#endif // TITLE_BAR_H
+#endif //! CAPTURER_TITLE_BAR_H

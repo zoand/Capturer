@@ -1,51 +1,62 @@
-#ifndef MAGNIFIER_H
-#define MAGNIFIER_H
+#ifndef CAPTURER_MAGNIFIER_H
+#define CAPTURER_MAGNIFIER_H
 
-#include <QWidget>
 #include <QLabel>
-#include <QPixmap>
 
-class Magnifier : public QWidget
+class Magnifier final : public QWidget
 {
 public:
-    enum class ColorFormat {
-        HEX, DEC
+    enum class ColorFormat : int
+    {
+        HEX,
+        INT,
+        FLT,
+        AUTO,
     };
+
 public:
     explicit Magnifier(QWidget *parent = nullptr);
 
-    inline void pixmap(const QPixmap& p) { pixmap_ = p; }
-    QRect mrect();
+    [[nodiscard]] QColor color() const { return color_; }
 
-    QColor getColor() const { return center_color_; }
-    QString getColorStringValue()
+    [[nodiscard]] QString colorname(ColorFormat = ColorFormat::AUTO) const;
+
+    void format(ColorFormat format) { cfmt_ = format; }
+
+    [[nodiscard]] ColorFormat format() const { return cfmt_; }
+
+    void toggleFormat()
     {
-        return color_format_ == ColorFormat::HEX
-                ? center_color_.name(QColor::HexRgb)
-                : QString("%1, %2, %3").arg(center_color_.red()).arg(center_color_.green()).arg(center_color_.blue());
+        cfmt_ = static_cast<ColorFormat>((static_cast<int>(cfmt_) + 1) % 3);
+        update();
     }
 
-    void colorFormat(ColorFormat format) { color_format_ = format; }
-    ColorFormat colorFormat() const { return color_format_; }
-    void toggleColorFormat() 
-    { 
-        color_format_ = (color_format_ == ColorFormat::HEX) ? ColorFormat::DEC : ColorFormat::HEX; 
-        update(); 
-    }
+    //
+    void setGrabPixmap(const QPixmap&);
 
 protected:
-    void paintEvent(QPaintEvent *);
+    bool eventFilter(QObject *, QEvent *) override;
+
+    void showEvent(QShowEvent *) override;
+    void paintEvent(QPaintEvent *) override;
+
+    void closeEvent(QCloseEvent *) override;
 
 private:
-    QLabel * label_ = nullptr;
-    QPixmap pixmap_;
+    [[nodiscard]] QRect   grabRect() const;
+    [[nodiscard]] QPixmap grab() const;
+    [[nodiscard]] QPoint  position() const;
 
-    int alpha_ = 5;
-    QSize msize_{ 31, 25 };
-    QSize psize_{ 0, 0 };
-    QColor center_color_;
+    QPixmap desktop_{};
 
-    ColorFormat color_format_ = ColorFormat::HEX;
+    QLabel *label_{};
+
+    int    alpha_{ 5 };
+    QSize  msize_{ 29, 29 };
+    QSize  psize_{ 0, 0 };
+    QColor color_;
+
+    ColorFormat cfmt_{ ColorFormat::HEX };
 };
 
-#endif // MAGNIFIER_H
+#endif //! CAPTURER_MAGNIFIER_H

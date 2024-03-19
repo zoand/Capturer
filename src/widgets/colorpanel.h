@@ -1,37 +1,29 @@
-#ifndef COLOR_PANEL_H
-#define COLOR_PANEL_H
+#ifndef CAPTURER_COLOR_PANEL_H
+#define CAPTURER_COLOR_PANEL_H
 
 #include <QPushButton>
-#include <QPainter>
-#include <QColorDialog>
-#include <QGridLayout>
-#include <QDebug>
 
 class ColorButton : public QPushButton
 {
     Q_OBJECT
 
 public:
-    explicit ColorButton(QWidget *parent = nullptr);
-    explicit ColorButton(const QColor& c, QWidget *parent = nullptr);
+    explicit ColorButton(QWidget * = nullptr);
+    explicit ColorButton(const QColor&, QWidget * = nullptr);
 
-    inline void color(const QColor& c) { color_ = c; update(); emit changed(color_); }
-    inline QColor color() const { return color_; }
+    void setColor(const QColor& c, bool silence = true);
+
+    [[nodiscard]] QColor color() const { return color_; }
 
 signals:
     void clicked(const QColor&);
     void changed(const QColor&);
 
 protected:
-    void paintEvent(QPaintEvent *e) override;
-    void enterEvent(QEvent *) override;
-    void leaveEvent(QEvent *) override;
+    void paintEvent(QPaintEvent *) override;
 
 protected:
-    QColor color_ = Qt::blue;
-    QColor default_color_{"#bfbfbf"};
-    QPen border_pen_{default_color_, 2};
-    QColor hover_color_ = QColor("#2080f0");
+    QColor color_{ Qt::blue };
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -40,35 +32,31 @@ class ColorDialogButton : public ColorButton
     Q_OBJECT
 
 public:
-    explicit ColorDialogButton(QWidget *parent = nullptr);
-    explicit ColorDialogButton(const QColor&, QWidget *parent = nullptr);
-    ~ColorDialogButton() override;
+    explicit ColorDialogButton(QWidget * = nullptr);
+    explicit ColorDialogButton(const QColor&, QWidget * = nullptr);
 
 protected:
-    void wheelEvent(QWheelEvent*) override;
-
-private:
-    QColorDialog *color_dialog_;
+    void wheelEvent(QWheelEvent *) override;
 };
 
 ///////////////////////////////////////////////////////////////////////////
 class ColorPanel : public QWidget
 {
     Q_OBJECT
+
 public:
-    explicit ColorPanel(QWidget * parent = nullptr);
-    QColor color() const { return color_dialog_btn_->color(); }
+    explicit ColorPanel(QWidget * = nullptr);
+
+    [[nodiscard]] QColor color() const { return color_dialog_btn_->color(); }
 
 signals:
     void changed(const QColor&);
 
 public slots:
-    void setColor(const QColor& color) {
-        color_dialog_btn_->color(color);
-    }
+    void setColor(const QColor& color, bool silence = true) { color_dialog_btn_->setColor(color, silence); }
 
 private:
-    ColorDialogButton * color_dialog_btn_ = nullptr;
+    ColorDialogButton *color_dialog_btn_{};
 };
 
-#endif // COLOR_PANEL_H
+#endif //! CAPTURER_COLOR_PANEL_H

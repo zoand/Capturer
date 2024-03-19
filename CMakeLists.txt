@@ -1,115 +1,226 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.21)
 
-project(capturer VERSION 1.3.1 LANGUAGES C CXX)
+project(capturer VERSION 1.6.0 LANGUAGES C CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-if(MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /utf-8")
-endif()
+if (NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Default build type: Release." FORCE)
+endif ()
 
-########################################################################################################################
-# dependences
-########################################################################################################################
+# #######################################################################################################################
+# dependencies
+# #######################################################################################################################
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/3rdparty/cmake-modules")
 
-# 3rdparty: QHotkey glog gflags
-add_subdirectory(3rdparty/QHotkey EXCLUDE_FROM_ALL)
-add_subdirectory(3rdparty/gflags EXCLUDE_FROM_ALL)
-add_subdirectory(3rdparty/glog EXCLUDE_FROM_ALL)
+# 3rdparty: QHotkey glog
+set(BUILD_SHARED_LIBS   OFF CACHE BOOL "Build static libraries")
+set(WITH_GFLAGS         OFF CACHE BOOL "Use gflags for google/glog")
+set(PROBE_BUILD_WITH_QT ON  CACHE BOOL "Build probe with Qt")
+set(JSON_BuildTests     OFF CACHE BOOL "Build nlohmann/json tests")
 
-# Qt5
+# Qt 5 / 6
+if (NOT QT_DEFAULT_MAJOR_VERSION)
+    set(QT_DEFAULT_MAJOR_VERSION 5 CACHE STRING "Qt major version to use (5 or 6), default: 5.")
+endif ()
+
+add_subdirectory(3rdparty/QHotkey   EXCLUDE_FROM_ALL)
+add_subdirectory(3rdparty/glog      EXCLUDE_FROM_ALL)
+add_subdirectory(3rdparty/fmt       EXCLUDE_FROM_ALL)
+add_subdirectory(3rdparty/probe     EXCLUDE_FROM_ALL)
+add_subdirectory(3rdparty/json      EXCLUDE_FROM_ALL)
+add_subdirectory(libcap             EXCLUDE_FROM_ALL)
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5 COMPONENTS Widgets Gui LinguistTools REQUIRED)
+if (${QT_DEFAULT_MAJOR_VERSION} EQUAL 5)
+    find_package(Qt5 5.15 COMPONENTS Core Gui Widgets LinguistTools REQUIRED)
+else ()
+    find_package(Qt6 6.5 COMPONENTS Core Gui OpenGL Widgets OpenGLWidgets LinguistTools REQUIRED)
+endif ()
 
-if(WIN32)
+if (WIN32)
     # GUI/console
-    set(CMAKE_WIN32_EXECUTABLE ON)
-    
-    # Windows API
-    add_definitions(-DUNICODE)
-elseif(UNIX AND NOT APPLE)
-    find_package(Qt5 COMPONENTS X11Extras REQUIRED)
-endif()
+    set(CMAKE_WIN32_EXECUTABLE $<IF:$<CONFIG:DEBUG>,OFF,ON>)
 
-########################################################################################################################
+    find_package(FFmpeg 6 REQUIRED)
+elseif (UNIX AND NOT APPLE)
+    find_package(FFmpeg 4.2 REQUIRED)
+
+    find_package(Qt${QT_DEFAULT_MAJOR_VERSION} COMPONENTS X11Extras REQUIRED)
+endif ()
+
+# #######################################################################################################################
 # Create the executable
-########################################################################################################################
+# #######################################################################################################################
 configure_file(src/version.h.in ${PROJECT_BINARY_DIR}/version.h @ONLY)
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
 
 set(TS_FILES languages/capturer_en_US.ts languages/capturer_zh_CN.ts)
-qt5_create_translation(QM_FILES ${SOURCES} ${TS_FILES})
+
+if (QT_DEFAULT_MAJOR_VERSION EQUAL 5)
+    qt5_create_translation(QM_FILES ${SOURCES} ${TS_FILES} OPTIONS -locations none -no-obsolete)
+elseif (QT_DEFAULT_MAJOR_VERSION EQUAL 6)
+    qt6_create_translation(QM_FILES ${SOURCES} ${TS_FILES} OPTIONS -locations none -no-obsolete)
+endif ()
 
 add_executable(${PROJECT_NAME}
-        ${SOURCES}
-        src/capturer.qrc
-        ${QM_FILES}
-        $<$<PLATFORM_ID:Windows>:src/ico_win32.rc>
+    ${SOURCES}
+    src/capturer.qrc
+    ${QM_FILES}
+    $<$<PLATFORM_ID:Windows>:src/ico_win32.rc>
+)
+
+if (WIN32)
+    # Build HLSL shaders
+    add_custom_target(shaders)
+
+    set(HLSL_SHADER_FILES src/resources/d3d11/ConvertVertexShader.hlsl src/resources/d3d11/ResizingVertexShader.hlsl src/resources/d3d11/ConvertPixelShader.hlsl src/resources/d3d11/ResizingPixelShader.hlsl)
+
+    set_source_files_properties(src/resources/d3d11/ConvertVertexShader.hlsl    PROPERTIES ShaderType "vs")
+    set_source_files_properties(src/resources/d3d11/ResizingVertexShader.hlsl   PROPERTIES ShaderType "vs")
+    set_source_files_properties(src/resources/d3d11/ConvertPixelShader.hlsl     PROPERTIES ShaderType "ps")
+    set_source_files_properties(src/resources/d3d11/ResizingPixelShader.hlsl    PROPERTIES ShaderType "ps")
+
+    set_source_files_properties(${HLSL_SHADER_FILES}                            PROPERTIES ShaderModel "5_0")
+
+    foreach (FILE ${HLSL_SHADER_FILES})
+        get_filename_component(FILE_WE ${FILE} NAME_WE)
+        list(APPEND CSO_SHADER_FILES ${PROJECT_BINARY_DIR}/${FILE_WE}.cso)
+        get_source_file_property(shadertype ${FILE} ShaderType)
+        get_source_file_property(shadermodel ${FILE} ShaderModel)
+        add_custom_command(TARGET shaders
+            COMMAND fxc.exe /nologo /E${shadertype}_main /T${shadertype}_${shadermodel} $<IF:$<CONFIG:DEBUG>,/Od,/O1> /Zi /Fh ${PROJECT_BINARY_DIR}/${FILE_WE}.h ${FILE}
+            MAIN_DEPENDENCY ${FILE}
+            COMMENT "HLSL ${FILE}"
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            VERBATIM
+        )
+    endforeach ()
+
+    add_dependencies(${PROJECT_NAME} shaders)
+endif ()
+
+target_compile_options(${PROJECT_NAME}
+    PRIVATE
+        $<$<CXX_COMPILER_ID:MSVC>:/W4 /utf-8 /DUNICODE /D_UNICODE /DNOMINMAX /Zc:preprocessor /Zc:__cplusplus /wd5054>
+        $<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wall -Wextra -Wpedantic -Wno-deprecated-enum-enum-conversion>
 )
 
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
-        QHotkey::QHotkey Qt5::Widgets Qt5::Gui gflags::gflags glog::glog
-        $<$<PLATFORM_ID:Windows>:dwmapi>
-        $<$<PLATFORM_ID:Windows>:strmiids>
-        $<$<PLATFORM_ID:Linux>:Qt5::X11Extras>
+        QHotkey::QHotkey
+        Qt${QT_DEFAULT_MAJOR_VERSION}::Core Qt${QT_DEFAULT_MAJOR_VERSION}::Gui Qt${QT_DEFAULT_MAJOR_VERSION}::Widgets
+        $<$<EQUAL:${QT_DEFAULT_MAJOR_VERSION},6>:Qt6::OpenGL> $<$<EQUAL:${QT_DEFAULT_MAJOR_VERSION},6>:Qt6::OpenGLWidgets>
+        glog::glog
+        fmt::fmt
+        ffmpeg::ffmpeg
+        probe::probe
+        nlohmann_json::nlohmann_json
+        libcap::libcap
+        $<$<PLATFORM_ID:Linux>:Qt${QT_DEFAULT_MAJOR_VERSION}::X11Extras>
+        $<$<PLATFORM_ID:Windows>:Winmm>
 )
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
-        3rdparty
-        src/core
+        src/
+        src/common
         src/widgets
-        src/menu
-        src/pinned
-        src/snip
-        src/video
-        src/gif
+        src/preview
+        src/snipping
+        src/player
         src/setting
         ${PROJECT_BINARY_DIR} # Generated header files
 )
 
-########################################################################################################################
+# #######################################################################################################################
 # Install
-########################################################################################################################
-
+# #######################################################################################################################
 message(STATUS "CMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}")
 
 # Binaries
-if(WIN32)
+if (WIN32)
     install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_INSTALL_PREFIX}")
     install(FILES ${QM_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/translations")
-else(UNIX AND NOT APPLE)
-    install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-    install(FILES ${QM_FILES} DESTINATION "/etc/capturer/translations")
-endif()
+elseif (UNIX AND NOT APPLE)
+    # installed: /usr/local/bin/capturer
+    # installed: /usr/local/etc/capturer/translations/capturer_en_US.ts
+    # installed: /usr/local/etc/capturer/translations/capturer_zh_CN.ts
+    # installed: /usr/share/applications/capturer.desktop
+    # installed: /usr/share/pixmaps/capturer.png
+    # installed: /usr/share/icons/hicolor/128x128/apps/capturer.png
+    # installed: ~/.config/capturer/config.json
+    # installed: ~/.config/autostart/capturer.desktop
+    # installed: ~/.local/logs/capturer/capturer-*.log
+    install(TARGETS ${PROJECT_NAME} DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
+    install(FILES ${QM_FILES} DESTINATION "${CMAKE_INSTALL_PREFIX}/etc/capturer/translations")
+    install(FILES "${PROJECT_SOURCE_DIR}/capturer.desktop" DESTINATION "/usr/share/applications")
+    install(FILES "${PROJECT_SOURCE_DIR}/src/resources/icons/capturer.png" DESTINATION "/usr/share/pixmaps")
+    install(FILES "${PROJECT_SOURCE_DIR}/src/resources/icons/capturer.png" DESTINATION "/usr/share/icons/hicolor/128x128/apps")
+endif ()
 
-########################################################################################################################
+add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P "${PROJECT_SOURCE_DIR}/cmake/uninstall.cmake")
+
+# #######################################################################################################################
 # Create DEB
-########################################################################################################################
+# #######################################################################################################################
+if (UNIX)
+    set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
 
-# Tell CPack to generate a .deb package
-set(CPACK_GENERATOR "DEB")
+    # Set a Package Version
+    set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 
-# Set a Package Version
-set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+    set(CPACK_PACKAGE_DESCRIPTION "Screen snipping and recording")
 
-set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-set(CPACK_DEBIAN_PACKAGE_DEPENDS "ffmpeg")
+    set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_SOURCE_DIR}/LICENSE)
 
-# Set a Package Maintainer.
-# This is required
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Zhang Liangqi(zhliangqi@gmail.com)")
+    # Tell CPack to generate a .deb package
+    set(CPACK_GENERATOR "DEB")
 
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Capturer")
-set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Screenshots and recording screens.")
+    # Set a Package Maintainer.
+    # This is required
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Liangqi Zhang(zhliangqi@gmail.com)")
 
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
+    set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+    set(CPACK_DEBIAN_PACKAGE_DEPENDS "")
 
-include(CPack)
+    if (EXISTS "/etc/lsb-release")
+        file(STRINGS "/etc/lsb-release" SYSTEM_NAME)
+        execute_process(
+            COMMAND echo "${SYSTEM_NAME}"
+            COMMAND cut -d ";" -f 1
+            COMMAND cut -d "=" -f 2
+            OUTPUT_VARIABLE HOST_SYSTEM_NAME
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+        execute_process(
+            COMMAND echo "${SYSTEM_NAME}"
+            COMMAND cut -d ";" -f 2
+            COMMAND cut -d "=" -f 2
+            OUTPUT_VARIABLE HOST_SYSTEM_VER
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+
+        if (${HOST_SYSTEM_NAME} MATCHES "Ubuntu")
+            string(CONCAT HOST_SYSTEM_VER "ubuntu_" ${HOST_SYSTEM_VER})
+
+            # the ubuntu need to modify the architecture name
+            if (${CMAKE_HOST_SYSTEM_PROCESSOR} MATCHES "x86_64")
+                set(CMAKE_HOST_SYSTEM_PROCESSOR "amd64")
+            endif ()
+        endif ()
+
+        set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${HOST_SYSTEM_VER}-${CMAKE_HOST_SYSTEM_PROCESSOR})
+        set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE ${CMAKE_HOST_SYSTEM_PROCESSOR})
+    else ()
+        set(HOST_SYSTEM_VER "Unknown")
+    endif ()
+
+    include(CPack)
+endif ()

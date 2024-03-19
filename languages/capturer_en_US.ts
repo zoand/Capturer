@@ -2,219 +2,139 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>CameraPlayer</name>
+    <message>
+        <source>Close</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>Capturer</name>
     <message>
-        <location filename="../src/capturer.cpp" line="95"/>
-        <source>Snip</source>
-        <translation>Snip</translation>
-    </message>
-    <message>
-        <location filename="../src/capturer.cpp" line="96"/>
-        <source>Screen Record</source>
+        <source>Screenshot</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/capturer.cpp" line="97"/>
-        <source>GIF Record</source>
+        <source>Record Video</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/capturer.cpp" line="99"/>
+        <source>Record GIF</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Open Camera</source>
+        <translation></translation>
+    </message>
+    <message>
         <source>Settings</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/capturer.cpp" line="101"/>
         <source>Quit</source>
         <translation></translation>
     </message>
 </context>
 <context>
-    <name>GifCapturer</name>
+    <name>ColorDialogButton</name>
     <message>
-        <location filename="../src/gif/gifcapturer.cpp" line="80"/>
-        <source>Path: </source>
+        <source>Select Color</source>
         <translation></translation>
     </message>
 </context>
 <context>
-    <name>ImageEditMenu</name>
+    <name>EditingMenu</name>
     <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="38"/>
-        <source>Rectangle</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="47"/>
-        <source>Ellipse</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="56"/>
-        <source>Arrow</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="65"/>
-        <source>Line</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="74"/>
-        <source>Pencil</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="83"/>
-        <source>Text</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="92"/>
-        <source>Mosaic</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="101"/>
-        <source>Eraser</source>
+        <source>Open Image</source>
         <translation></translation>
     </message>
 </context>
 <context>
     <name>ImageWindow</name>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="254"/>
         <source>Open Image</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="271"/>
         <source>Save Image</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="308"/>
-        <source>Copy image</source>
+        <source>Copy</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="309"/>
-        <source>Paste image</source>
+        <source>Paste</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="328"/>
-        <source>Open image...</source>
+        <source>Open Image...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="329"/>
-        <source>Save as...</source>
+        <source>Save As...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="343"/>
-        <source>Gray</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="334"/>
-        <source>Rotate 90</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="313"/>
-        <source>Edit</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="333"/>
         <source>Grayscale</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="335"/>
+        <source>Rotate +90</source>
+        <translation></translation>
+    </message>
+    <message>
         <source>Rotate -90</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="336"/>
-        <source>Flip H</source>
+        <source>H Flip</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="337"/>
-        <source>Flip V</source>
+        <source>V Flip</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="341"/>
         <source>Background</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="342"/>
         <source>White</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="344"/>
+        <source>Gray</source>
+        <translation></translation>
+    </message>
+    <message>
         <source>Black</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="345"/>
-        <source>Transparent</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="347"/>
-        <source>Shadow</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="347"/>
-        <source>Hide </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="347"/>
-        <source>Show </source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="348"/>
         <source>Zoom : </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="349"/>
         <source>Opacity : </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="350"/>
         <source>Recover</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="354"/>
         <source>Close</source>
         <translation></translation>
     </message>
-</context>
-<context>
-    <name>ScreenRecorder</name>
     <message>
-        <location filename="../src/video/screenrecorder.cpp" line="81"/>
-        <source>Path: </source>
-        <translation></translation>
+        <source>Transparent Input</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>ScreenShoter</name>
     <message>
-        <location filename="../src/snip/screenshoter.cpp" line="210"/>
         <source>Save Image</source>
         <translation></translation>
     </message>
@@ -222,127 +142,262 @@
 <context>
     <name>SettingWindow</name>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="50"/>
         <source>Settings</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="72"/>
         <source>General</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="78"/>
-        <source>Run on startup</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="100"/>
-        <source>Language</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="106"/>
-        <source>Settings file</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="115"/>
-        <location filename="../src/setting/settingdialog.cpp" line="288"/>
         <source>Screenshot</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="120"/>
-        <location filename="../src/setting/settingdialog.cpp" line="164"/>
-        <location filename="../src/setting/settingdialog.cpp" line="223"/>
-        <source>Apperance:</source>
+        <source>GIF Recording</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="129"/>
-        <location filename="../src/setting/settingdialog.cpp" line="173"/>
-        <location filename="../src/setting/settingdialog.cpp" line="232"/>
-        <source>Border width</source>
+        <source>Devices</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="134"/>
-        <location filename="../src/setting/settingdialog.cpp" line="178"/>
-        <location filename="../src/setting/settingdialog.cpp" line="238"/>
-        <source>Border color</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="145"/>
-        <location filename="../src/setting/settingdialog.cpp" line="189"/>
-        <location filename="../src/setting/settingdialog.cpp" line="249"/>
-        <source>Line type</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="150"/>
-        <location filename="../src/setting/settingdialog.cpp" line="194"/>
-        <location filename="../src/setting/settingdialog.cpp" line="254"/>
-        <source>Mask color</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="159"/>
-        <source>Screen recording</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="199"/>
-        <location filename="../src/setting/settingdialog.cpp" line="258"/>
-        <source>Params:</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="208"/>
-        <location filename="../src/setting/settingdialog.cpp" line="267"/>
-        <source>Framerate</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="218"/>
-        <location filename="../src/setting/settingdialog.cpp" line="316"/>
-        <source>Gif recording</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="277"/>
-        <source>Shortcuts</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="295"/>
-        <source>Paste</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="302"/>
-        <source>Hide/Show all images</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="309"/>
-        <source>Video recording</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="325"/>
         <source>About</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="335"/>
-        <source>Version</source>
+        <source>Run on Startup</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="344"/>
-        <source>Copyright © 2018 - 2021 ffiirree All rights reserved</source>
+        <source>Language</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Settings File</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Border Width</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Border Color</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Mask Color</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Show Region</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Framerate</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Software x264 [H.264 / AVC]</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Software x265 [H.265 / HEVC]</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Hardware NVENC [H.264 / AVC]</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Hardware NVENC [H.265 / HEVC]</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Encoder</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Gif Recording</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Hotkeys</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Channel Layout</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Save Path</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Toggle Previews</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Appearance</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Border Style</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Params</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Microphone</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Speaker</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Copyright © 2018 - 2024 ffiirree</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Rate Control</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Preset</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Profile</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Max Colors</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Dither</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Preview Clipboard</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Quick Look</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Mouse</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>System Audio</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Captured by Default</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Transparent Input</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Floating Menu</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>VideoPlayer</name>
+    <message>
+        <source>Video</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Renderer</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Rotate +90</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Rotate -90</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Select Audio Stream</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Subtitles</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Select Subtitles</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Add Subtitles</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Show/Hide Subtitles</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Properties</source>
         <translation></translation>
     </message>
 </context>

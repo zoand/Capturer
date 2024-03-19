@@ -1,31 +1,21 @@
 #include "circlecursor.h"
+
 #include <QPainter>
-#include <QDebug>
 
-CircleCursor::CircleCursor()
-    : CircleCursor(3)
-{ }
-
-
-CircleCursor::CircleCursor(int width)
-    : width_(width)
+QPixmap cursor::circle(qreal width, const QPen& pen, const QBrush& brush)
 {
-    repaint();
-}
+    width = std::min<qreal>(width, 71);
 
+    QPixmap cursor{ 75, 75 };
+    cursor.fill(Qt::transparent);
 
-void CircleCursor::repaint()
-{
-    auto rect = cursor_.rect();
-    cursor_.fill(Qt::transparent);
-    auto center = rect.center();
+    QPainter painter(&cursor);
 
-    QPainter painter(&cursor_);
+    painter.setPen(pen);
+    painter.setBrush(brush);
 
-    painter.setPen(QPen(QColor("#888888"), 2, Qt::SolidLine));
-    painter.setBrush(QColor(225, 200, 0, 175));
     painter.setRenderHint(QPainter::Antialiasing, true);
-    painter.drawEllipse(center.x() - width_/2, center.y() - width_/2, width_, width_);
+    painter.drawEllipse(QPointF{ cursor.rect().center() }, width / 2, width / 2);
 
-    painter.end();
+    return cursor;
 }

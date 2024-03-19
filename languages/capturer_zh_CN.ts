@@ -2,219 +2,139 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
-    <name>Capturer</name>
+    <name>CameraPlayer</name>
     <message>
-        <location filename="../src/capturer.cpp" line="95"/>
-        <source>Snip</source>
-        <translation>截图</translation>
-    </message>
-    <message>
-        <location filename="../src/capturer.cpp" line="96"/>
-        <source>Screen Record</source>
-        <translation>录屏</translation>
-    </message>
-    <message>
-        <location filename="../src/capturer.cpp" line="97"/>
-        <source>GIF Record</source>
-        <translation>录GIF</translation>
-    </message>
-    <message>
-        <location filename="../src/capturer.cpp" line="99"/>
-        <source>Settings</source>
-        <translation>设置</translation>
-    </message>
-    <message>
-        <location filename="../src/capturer.cpp" line="101"/>
-        <source>Quit</source>
-        <translation>退出</translation>
-    </message>
-</context>
-<context>
-    <name>GifCapturer</name>
-    <message>
-        <location filename="../src/gif/gifcapturer.cpp" line="80"/>
-        <source>Path: </source>
-        <translation>路径：</translation>
-    </message>
-</context>
-<context>
-    <name>ImageEditMenu</name>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="38"/>
-        <source>Rectangle</source>
-        <translation>矩形</translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="47"/>
-        <source>Ellipse</source>
-        <translation>椭圆</translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="56"/>
-        <source>Arrow</source>
-        <translation>箭头</translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="65"/>
-        <source>Line</source>
-        <translation>直线</translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="74"/>
-        <source>Pencil</source>
-        <translation>画笔</translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="83"/>
-        <source>Text</source>
-        <translation>文本</translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="92"/>
-        <source>Mosaic</source>
-        <translation>马赛克</translation>
-    </message>
-    <message>
-        <location filename="../src/menu/imageeditmenu.cpp" line="101"/>
-        <source>Eraser</source>
-        <translation>橡皮擦</translation>
-    </message>
-</context>
-<context>
-    <name>ImageWindow</name>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="254"/>
-        <source>Open Image</source>
-        <translation>打开图片</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="271"/>
-        <source>Save Image</source>
-        <translation>保存图片</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="308"/>
-        <source>Copy image</source>
-        <translation>复制图片</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="309"/>
-        <source>Paste image</source>
-        <translation>粘贴图片</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="313"/>
-        <source>Edit</source>
-        <translation>编辑</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="328"/>
-        <source>Open image...</source>
-        <translation>打开图片</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="329"/>
-        <source>Save as...</source>
-        <translation>另存为...</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="343"/>
-        <source>Gray</source>
-        <translation>灰色</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="334"/>
-        <source>Rotate 90</source>
-        <translation>顺时针旋转90°</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="333"/>
-        <source>Grayscale</source>
-        <translation>灰阶</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="335"/>
-        <source>Rotate -90</source>
-        <translation>逆时针旋转90°</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="336"/>
-        <source>Flip H</source>
-        <translation>水平翻转</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="337"/>
-        <source>Flip V</source>
-        <translation>垂直翻转</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="341"/>
-        <source>Background</source>
-        <translation>背景色</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="342"/>
-        <source>White</source>
-        <translation>白色</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="344"/>
-        <source>Black</source>
-        <translation>黑色</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="345"/>
-        <source>Transparent</source>
-        <translation>透明</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="347"/>
-        <source>Shadow</source>
-        <translation>阴影</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="347"/>
-        <source>Hide </source>
-        <translation>隐藏</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="347"/>
-        <source>Show </source>
-        <translation>显示</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="348"/>
-        <source>Zoom : </source>
-        <translation>缩放 ：</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="349"/>
-        <source>Opacity : </source>
-        <translation>透明度 ：</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="350"/>
-        <source>Recover</source>
-        <translation>复原</translation>
-    </message>
-    <message>
-        <location filename="../src/pinned/imagewindow.cpp" line="354"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
 </context>
 <context>
-    <name>ScreenRecorder</name>
+    <name>Capturer</name>
     <message>
-        <location filename="../src/video/screenrecorder.cpp" line="81"/>
-        <source>Path: </source>
-        <translation>路径：</translation>
+        <source>Screenshot</source>
+        <translation>截图</translation>
+    </message>
+    <message>
+        <source>Record Video</source>
+        <translation>录制视频</translation>
+    </message>
+    <message>
+        <source>Record GIF</source>
+        <translation>录制动图</translation>
+    </message>
+    <message>
+        <source>Open Camera</source>
+        <translation>打开相机</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>设置</translation>
+    </message>
+    <message>
+        <source>Quit</source>
+        <translation>退出</translation>
+    </message>
+</context>
+<context>
+    <name>ColorDialogButton</name>
+    <message>
+        <source>Select Color</source>
+        <translation>选择颜色</translation>
+    </message>
+</context>
+<context>
+    <name>EditingMenu</name>
+    <message>
+        <source>Open Image</source>
+        <translation>打开图片</translation>
+    </message>
+</context>
+<context>
+    <name>ImageWindow</name>
+    <message>
+        <source>Open Image</source>
+        <translation>打开图片</translation>
+    </message>
+    <message>
+        <source>Save Image</source>
+        <translation>保存图片</translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation>复制</translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation>粘贴</translation>
+    </message>
+    <message>
+        <source>Open Image...</source>
+        <translation>打开图片...</translation>
+    </message>
+    <message>
+        <source>Save As...</source>
+        <translation>另存为...</translation>
+    </message>
+    <message>
+        <source>Grayscale</source>
+        <translation>灰度图</translation>
+    </message>
+    <message>
+        <source>Rotate +90</source>
+        <translation>旋转 +90°</translation>
+    </message>
+    <message>
+        <source>Rotate -90</source>
+        <translation>旋转 -90°</translation>
+    </message>
+    <message>
+        <source>H Flip</source>
+        <translation>水平翻转</translation>
+    </message>
+    <message>
+        <source>V Flip</source>
+        <translation>垂直翻转</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation>背景色</translation>
+    </message>
+    <message>
+        <source>White</source>
+        <translation>白色</translation>
+    </message>
+    <message>
+        <source>Gray</source>
+        <translation>灰色</translation>
+    </message>
+    <message>
+        <source>Black</source>
+        <translation>黑色</translation>
+    </message>
+    <message>
+        <source>Zoom : </source>
+        <translation>缩放 :</translation>
+    </message>
+    <message>
+        <source>Opacity : </source>
+        <translation>透明度 :</translation>
+    </message>
+    <message>
+        <source>Recover</source>
+        <translation>复原</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>关闭</translation>
+    </message>
+    <message>
+        <source>Transparent Input</source>
+        <translation>输入穿透</translation>
     </message>
 </context>
 <context>
     <name>ScreenShoter</name>
     <message>
-        <location filename="../src/snip/screenshoter.cpp" line="210"/>
         <source>Save Image</source>
         <translation>保存图片</translation>
     </message>
@@ -222,128 +142,263 @@
 <context>
     <name>SettingWindow</name>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="50"/>
         <source>Settings</source>
         <translation>设置</translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="72"/>
         <source>General</source>
         <translation>通用</translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="78"/>
-        <source>Run on startup</source>
-        <translation>开机启动</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="100"/>
-        <source>Language</source>
-        <translation>语言</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="106"/>
-        <source>Settings file</source>
-        <translation>设置文件</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="115"/>
-        <location filename="../src/setting/settingdialog.cpp" line="288"/>
         <source>Screenshot</source>
-        <translation>截图</translation>
+        <translation>屏幕截图</translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="120"/>
-        <location filename="../src/setting/settingdialog.cpp" line="164"/>
-        <location filename="../src/setting/settingdialog.cpp" line="223"/>
-        <source>Apperance:</source>
-        <translation>界面:</translation>
+        <source>GIF Recording</source>
+        <translation>GIF录制</translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="129"/>
-        <location filename="../src/setting/settingdialog.cpp" line="173"/>
-        <location filename="../src/setting/settingdialog.cpp" line="232"/>
-        <source>Border width</source>
-        <translation>边框宽度</translation>
+        <source>Devices</source>
+        <translation>设备</translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="134"/>
-        <location filename="../src/setting/settingdialog.cpp" line="178"/>
-        <location filename="../src/setting/settingdialog.cpp" line="238"/>
-        <source>Border color</source>
-        <translation>边框颜色</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="145"/>
-        <location filename="../src/setting/settingdialog.cpp" line="189"/>
-        <location filename="../src/setting/settingdialog.cpp" line="249"/>
-        <source>Line type</source>
-        <translation>线段类型</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="150"/>
-        <location filename="../src/setting/settingdialog.cpp" line="194"/>
-        <location filename="../src/setting/settingdialog.cpp" line="254"/>
-        <source>Mask color</source>
-        <translation>遮罩颜色</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="159"/>
-        <source>Screen recording</source>
-        <translation>录屏</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="199"/>
-        <location filename="../src/setting/settingdialog.cpp" line="258"/>
-        <source>Params:</source>
-        <translation>参数:</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="208"/>
-        <location filename="../src/setting/settingdialog.cpp" line="267"/>
-        <source>Framerate</source>
-        <translation>帧率</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="218"/>
-        <location filename="../src/setting/settingdialog.cpp" line="316"/>
-        <source>Gif recording</source>
-        <translation>录GIF</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="277"/>
-        <source>Shortcuts</source>
-        <translation>快捷键</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="295"/>
-        <source>Paste</source>
-        <translation>粘贴</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="302"/>
-        <source>Hide/Show all images</source>
-        <translation>隐藏/显示全部贴图</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="309"/>
-        <source>Video recording</source>
-        <translation>录制视频</translation>
-    </message>
-    <message>
-        <location filename="../src/setting/settingdialog.cpp" line="325"/>
         <source>About</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="335"/>
-        <source>Version</source>
-        <translation>版本</translation>
+        <source>Run on Startup</source>
+        <translation>开机自启</translation>
     </message>
     <message>
-        <location filename="../src/setting/settingdialog.cpp" line="344"/>
-        <source>Copyright © 2018 - 2021 ffiirree All rights reserved</source>
+        <source>Language</source>
+        <translation>语言</translation>
+    </message>
+    <message>
+        <source>Settings File</source>
+        <translation>设置文件</translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation>跟随系统</translation>
+    </message>
+    <message>
+        <source>Dark</source>
+        <translation>暗色</translation>
+    </message>
+    <message>
+        <source>Light</source>
+        <translation>亮色</translation>
+    </message>
+    <message>
+        <source>Theme</source>
+        <translation>主题</translation>
+    </message>
+    <message>
+        <source>Border Width</source>
+        <translation>边框宽度</translation>
+    </message>
+    <message>
+        <source>Border Color</source>
+        <translation>边框颜色</translation>
+    </message>
+    <message>
+        <source>Mask Color</source>
+        <translation>遮罩颜色</translation>
+    </message>
+    <message>
+        <source>Show Region</source>
+        <translation>显示录制区域</translation>
+    </message>
+    <message>
+        <source>Framerate</source>
+        <translation>帧率</translation>
+    </message>
+    <message>
+        <source>Software x264 [H.264 / AVC]</source>
+        <translation>软件编码 x264 [H.264 / AVC]</translation>
+    </message>
+    <message>
+        <source>Software x265 [H.265 / HEVC]</source>
+        <translation>软件编码 x265 [H.265 / HEVC]</translation>
+    </message>
+    <message>
+        <source>Hardware NVENC [H.264 / AVC]</source>
+        <translation>硬件编码 NVENC [H.264 / AVC]</translation>
+    </message>
+    <message>
+        <source>Hardware NVENC [H.265 / HEVC]</source>
+        <translation>硬件编码 NVENC [H.265 / HEVC]</translation>
+    </message>
+    <message>
+        <source>Encoder</source>
+        <translation>编码器</translation>
+    </message>
+    <message>
+        <source>Video Recording</source>
+        <translation>视频录制</translation>
+    </message>
+    <message>
+        <source>Gif Recording</source>
+        <translation>GIF录制</translation>
+    </message>
+    <message>
+        <source>Hotkeys</source>
+        <translation>快捷键</translation>
+    </message>
+    <message>
+        <source>Channel Layout</source>
+        <translation>声道</translation>
+    </message>
+    <message>
+        <source>Save Path</source>
+        <translation>保存路径</translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation>封装格式</translation>
+    </message>
+    <message>
+        <source>Toggle Previews</source>
+        <translation>显示/隐藏所有预览</translation>
+    </message>
+    <message>
+        <source>Appearance</source>
+        <translation>外观</translation>
+    </message>
+    <message>
+        <source>Border Style</source>
+        <translation>边框风格</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation>文件</translation>
+    </message>
+    <message>
+        <source>Video</source>
+        <translation>视频</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation>音频</translation>
+    </message>
+    <message>
+        <source>Params</source>
+        <translation>参数</translation>
+    </message>
+    <message>
+        <source>Microphone</source>
+        <translation>麦克风</translation>
+    </message>
+    <message>
+        <source>Speaker</source>
+        <translation>扬声器</translation>
+    </message>
+    <message>
+        <source>Camera</source>
+        <translation>相机</translation>
+    </message>
+    <message>
+        <source>Copyright © 2018 - 2024 ffiirree</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Rate Control</source>
+        <translation>速率控制</translation>
+    </message>
+    <message>
+        <source>Preset</source>
+        <translation>预设</translation>
+    </message>
+    <message>
+        <source>Profile</source>
+        <translation>配置</translation>
+    </message>
+    <message>
+        <source>Max Colors</source>
+        <translation>最大色彩数</translation>
+    </message>
+    <message>
+        <source>Dither</source>
+        <translation>抖动</translation>
+    </message>
+    <message>
+        <source>Sample Rate</source>
+        <translation>采样率</translation>
+    </message>
+    <message>
+        <source>Preview Clipboard</source>
+        <translation>预览剪切板</translation>
+    </message>
+    <message>
+        <source>Quick Look</source>
+        <translation>快速预览</translation>
+    </message>
+    <message>
+        <source>Mouse</source>
+        <translation>鼠标</translation>
+    </message>
+    <message>
+        <source>System Audio</source>
+        <translation>系统声音</translation>
+    </message>
+    <message>
+        <source>Captured by Default</source>
+        <translation>默认捕获</translation>
+    </message>
+    <message>
+        <source>Transparent Input</source>
+        <translation>输入穿透</translation>
+    </message>
+    <message>
+        <source>Floating Menu</source>
+        <translation>悬浮菜单</translation>
+    </message>
+</context>
+<context>
+    <name>VideoPlayer</name>
+    <message>
+        <source>Video</source>
+        <translation>视频</translation>
+    </message>
+    <message>
+        <source>Renderer</source>
+        <translation>渲染器</translation>
+    </message>
+    <message>
+        <source>Rotate +90</source>
+        <translation>旋转 +90°</translation>
+    </message>
+    <message>
+        <source>Rotate -90</source>
+        <translation>旋转 -90°</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation>音频</translation>
+    </message>
+    <message>
+        <source>Select Audio Stream</source>
+        <translation>选择音频流</translation>
+    </message>
+    <message>
+        <source>Subtitles</source>
+        <translation>字幕</translation>
+    </message>
+    <message>
+        <source>Select Subtitles</source>
+        <translation>选择字幕</translation>
+    </message>
+    <message>
+        <source>Add Subtitles</source>
+        <translation>添加字幕</translation>
+    </message>
+    <message>
+        <source>Show/Hide Subtitles</source>
+        <translation>显示/隐藏字幕</translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation>属性</translation>
     </message>
 </context>
 </TS>

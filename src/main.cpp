@@ -1,57 +1,61 @@
-#include <QApplication>
-#include <QOperatingSystemVersion>
-#include <QFile>
-#include <QTranslator>
-#include <gflags/gflags.h>
-#include "version.h"
-#include "utils.h"
-#include "displayinfo.h"
 #include "capturer.h"
+#include "config.h"
 #include "logging.h"
+#include "probe/cpu.h"
+#include "probe/system.h"
+#include "probe/util.h"
+#include "version.h"
+
+#include <QTranslator>
 
 int main(int argc, char *argv[])
 {
-    Logger::init(argv);
+    qputenv("QT_ENABLE_HIGHDPI_SCALING", "0");
 
-    gflags::SetVersionString(CAPTURER_VERSION);
-    gflags::ParseCommandLineFlags(&argc, &argv, true);
+    QApplication::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
 
-    QApplication a(argc, argv);
-    QApplication::setQuitOnLastWindowClosed(false);
-
-    LOG(INFO) << "Capturer " << CAPTURER_VERSION << " (Qt " << qVersion() << ")";
-
-    LOG(INFO) << "Operating System: "
-#ifdef __linux__
-              << "Linux" <<  " ("
-#else
-              <<  QOperatingSystemVersion::current().name() << " "
-              <<  QOperatingSystemVersion::current().majorVersion() << "."
-              <<  QOperatingSystemVersion::current().minorVersion() << "."
-              <<  QOperatingSystemVersion::current().microVersion() << " ("
+#ifdef _WIN32
+    ::SetConsoleOutputCP(CP_UTF8);
+    ::setvbuf(stdout, nullptr, _IONBF, 0);
 #endif
-              << QSysInfo::currentCpuArchitecture() << ")";
 
+    Logger::init(argv[0]);
 
-    LOG(INFO) << "Application Dir: " << QCoreApplication::applicationDirPath();
+    probe::thread::set_name("capturer-main");
 
-    // displays
-    DisplayInfo::instance();
+    config::load();
 
-    LOAD_QSS(qApp, ":/qss/menu/menu.qss");
+    logi("Capturer               {}", CAPTURER_VERSION);
+    logi(" -- Qt               : {}", qVersion());
+    logi(" -- Operating System : {} ({})", probe::system::name(),
+         probe::to_string(probe::system::version()));
+    logi(" -- Kernel           : {} {}", probe::system::kernel::name(),
+         probe::to_string(probe::system::kernel::version()));
+    logi(" -- CPU              : {}", probe::cpu::info().name);
+    logi(" -- Architecture     : {}", probe::to_string(probe::cpu::architecture()));
+    logi(" -- Virtual Screen   : {}", probe::to_string(probe::graphics::virtual_screen_geometry()));
+    for (const auto& display : probe::graphics::displays()) {
+        logi(" --   {:>14} : {}", display.id, probe::to_string(display.geometry));
+    }
+    logi(" -- Windowing System : {}", probe::to_string(probe::system::windowing_system()));
+    logi(" -- Desktop ENV      : {} ({})", probe::to_string(probe::system::desktop_environment()),
+         probe::to_string(probe::system::desktop_environment_version()));
+    logi(" -- Language         : {}", config::language.toStdString());
+    logi(" -- Config File      : {}", config::filepath.toStdString());
+    logi("");
 
-    auto language = Config::instance()["language"].get<QString>();
-    LOG(INFO) << "LANGUAGE: " << language;
+    Capturer app(argc, argv);
+    QApplication::setQuitOnLastWindowClosed(false);
 
     QTranslator translator;
 #ifdef __linux__
-    translator.load("/etc/capturer/translations/capturer_" + language);
+    translator.load("/usr/local/etc/capturer/translations/capturer_" + config::language);
 #else
-    translator.load("translations/capturer_" + language);
+    translator.load("translations/capturer_" + config::language);
 #endif
-    qApp->installTranslator(&translator);
+    Capturer::installTranslator(&translator);
 
-    Capturer window;
+    app.Init();
 
-    return a.exec();
+    return Capturer::exec();
 }

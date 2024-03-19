@@ -1,0 +1,24 @@
+SettingWindow * {
+    color: #333333;
+}
+
+SettingWindow, SettingWindow QWidget#scroll-content {
+    background: #f9f9f9;
+}
+
+SettingWindow QListWidget {
+    background-color: #f4f6f6;
+}
+
+SettingWindow QListWidget:item {
+    color: #1a1a1a;
+}
+
+SettingWindow QListWidget:item:hover,
+SettingWindow QListWidget:item:selected {
+    background: #e5e7e7;
+}
+
+SettingWindow QCheckBox#close-btn::indicator {
+    image: url(:/icons/close-dark);
+}
